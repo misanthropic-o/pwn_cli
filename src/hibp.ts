@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { BreachResult } from "./types.ts";
+import type { BreachResult } from "./types.ts";
 
 function sha1(password: string): string {
   return createHash("sha1").update(password).digest("hex").toUpperCase();
@@ -11,7 +11,7 @@ function splitHash(hash: string): { prefix: string; suffix: string } {
   return { prefix, suffix };
 }
 
-async function checkBreach(password: string): Promise<BreachResult> {
+export async function checkBreach(password: string): Promise<BreachResult> {
   const hash = sha1(password);
   const { prefix, suffix } = splitHash(hash);
 
@@ -26,5 +26,9 @@ async function checkBreach(password: string): Promise<BreachResult> {
 
   const match = splitLines.find((line) => line[0] === suffix);
 
-  return { passwordBreached: true, times: 3 };
+  if (match !== undefined) {
+    return { passwordBreached: true, times: Number(match[1]) };
+  } else {
+    return { passwordBreached: false };
+  }
 }

@@ -1,6 +1,6 @@
 import type { StrengthResult, PasswordRule } from "./types.js";
 
-function checkStrength(password: string): StrengthResult {
+export function checkStrength(password: string): StrengthResult {
   const PASSWORD_RULES: PasswordRule[] = [
     { test: (p) => p.length >= 8, id: "length", msg: "at least 8 chars" },
     {
