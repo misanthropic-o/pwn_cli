@@ -1,4 +1,4 @@
-# pw-checker-cli
+# pwn-cli
 
 typescript cli that checks if your password is actually good. checks local strength rules AND checks if it's already been leaked in a real breach, using k-anonymity so the real password never leaves your machine.
 
